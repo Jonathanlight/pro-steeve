@@ -1,0 +1,8 @@
+{% extends "@Experience/experienceType.base.html.twig" %}
+
+{% block body %}
+
+    {{ include('@Experience/ExperienceType/detail-content.html.twig', {experienceType: experienceType}) }}
+
+    <div><a class="btn-default btn abutton" href="#" onclick="goBack();"><span class="glyphicon glyphicon-chevron-left"></span>Retour</a></div>
+{% endblock %}

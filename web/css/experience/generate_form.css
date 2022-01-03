@@ -1,0 +1,13 @@
+.container_child > div:first-of-type {
+  text-align: right; }
+
+.container_slider .slider.slider-horizontal {
+  width: 100%; }
+  .container_slider .slider.slider-horizontal .slider-selection {
+    background: #337A94; }
+.container_slider .fn_min {
+  text-align: right; }
+.container_slider .fn_max {
+  text-align: left; }
+
+/*# sourceMappingURL=generate_form.css.map */

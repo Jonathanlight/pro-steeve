@@ -1,0 +1,261 @@
+
+{% block _experience_parameters_row %}
+    <div class="form-group">
+        <div class="col-sm-12">
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _experience_parameters_widget %}
+    <div class="row">
+        <div class="col-xs-12 parameters" data-prototype="{{ form_widget(form.vars.prototype)|e }}">
+            {% for item in form %}
+            <div class="parameter parent">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <div class="item-action">
+                                <span class="btn btn-primary parameter-move" title="Déplacer le paramètre"><i class="fa fa-arrows"></i></span>
+                                <span class="btn btn-danger parameter-delete" title="Supprimer le paramètre"><i class="fa fa-trash"></i></span>
+                            </div>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row parameterValues">
+                            <div class="col-xs-6">
+                                {{ form_row(item.name) }}
+                                {{ form_row(item.systemName) }}
+                                {{ form_row(item.parameterType) }}
+                                {{ form_row(item.unit) }}
+                                <div class="parameter-weight">
+                                    <span style="display:none;">{{ form_widget(item.weight) }}</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-parameterValueFloat">
+                                    <h3>Caractéristiques pour le type Nombre</h3>
+                                    {{ form_widget(item.parameterValueFloat) }}
+                                </div>
+                                <div class="form-parameterValueList">
+                                    <h3>Caractéristiques pour le type Liste</h3>
+                                    {{ form_widget(item.parameterValueLists) }}
+                                </div>
+                                <div class="form-parameterValueBool">
+                                    <h3>Caractéristiques pour le type Booléen</h3>
+                                    {{ form_widget(item.parameterValueBool) }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_widget(item.children) }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <button type="button" class="col-sm-offset-10 btn btn-primary parameter-add pull-right"><i class="fa fa-plus"></i> Ajouter un paramètre</button>
+{% endblock %}
+
+{% block _experience_parameters_entry_widget %}
+    <div class="parameter parent">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <div class="item-action">
+                        <span class="btn btn-primary parameter-move" title="Déplacer le paramètre"><i class="fa fa-arrows"></i></span>
+                        <span class="btn btn-danger parameter-delete" title="Supprimer le paramètre"><i class="fa fa-trash"></i></span>
+                    </div>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row parameterValues">
+                    <div class="col-xs-6">
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.systemName) }}
+                        {{ form_row(form.parameterType) }}
+                        {{ form_row(form.unit) }}
+                        <div class="parameter-weight">
+                            <span style="display:none;">{{ form_widget(form.weight) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-parameterValueFloat">
+                            <h3>Caractéristiques pour le type Nombre</h3>
+                            {{ form_widget(form.parameterValueFloat) }}
+                        </div>
+                        <div class="form-parameterValueList">
+                            <h3>Caractéristiques pour le type Liste</h3>
+                            {{ form_widget(form.parameterValueLists) }}
+                        </div>
+                        <div class="form-parameterValueBool">
+                            <h3>Caractéristiques pour le type Booléen</h3>
+                            {{ form_widget(form.parameterValueBool) }}
+                        </div>
+                    </div>
+                </div>
+                {{ form_widget(form.children) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block _experience_parameters_entry_children_widget %}
+    <div class="row container_children">
+        <div class="col-xs-12 children_parameters" data-prototype="{{ form_widget(form.vars.prototype)|e }}">
+            <h4>Dépendances</h4>
+            {% for item in form %}
+                <div class="parameter child">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <div class="item-action">
+                                    <span class="btn btn-primary parameter-child-move" title="Déplacer le paramètre"><i class="fa fa-arrows"></i></span>
+                                    <span class="btn btn-danger parameter-child-delete" title="Supprimer le paramètre"><i class="fa fa-trash"></i></span>
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row parameterValues">
+                                <div class="col-xs-6">
+                                    {{ form_row(item.parentValue) }}
+                                    {{ form_row(item.name) }}
+                                    {{ form_row(item.systemName) }}
+                                    {{ form_row(item.parameterType) }}
+                                    {{ form_row(item.unit) }}
+                                    <div class="parameter-weight" style="display:none;">
+                                        <span>{{ form_widget(item.weight) }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-parameterValueFloat">
+                                        <h3>Caractéristiques pour le type Nombre</h3>
+                                        {{ form_widget(item.parameterValueFloat) }}
+                                    </div>
+                                    <div class="form-parameterValueList">
+                                        <h3>Caractéristiques pour le type Liste</h3>
+                                        {{ form_widget(item.parameterValueLists) }}
+                                    </div>
+                                    <div class="form-parameterValueBool">
+                                        <h3>Caractéristiques pour le type Booléen</h3>
+                                        {{ form_widget(item.parameterValueBool) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" class="col-sm-offset-10 btn btn-primary parameter-child-add pull-right"><i class="fa fa-plus"></i> Ajouter une dépendance</button>
+    </div>
+{% endblock %}
+
+{% block _experience_parameters_entry_children_entry_widget %}
+    <div class="parameter child">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <div class="item-action">
+                        <span class="btn btn-primary parameter-child-move" title="Déplacer le paramètre"><i class="fa fa-arrows"></i></span>
+                        <span class="btn btn-danger parameter-child-delete" title="Supprimer le paramètre"><i class="fa fa-trash"></i></span>
+                    </div>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row parameterValues">
+                    <div class="col-xs-6">
+                        {{ form_row(form.parentValue) }}
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.systemName) }}
+                        {{ form_row(form.parameterType) }}
+                        {{ form_row(form.unit) }}
+                        <div class="parameter-weight" style="display:none;">
+                            <span>{{ form_widget(form.weight) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-parameterValueFloat">
+                            <h3>Caractéristiques pour le type Nombre</h3>
+                            {{ form_widget(form.parameterValueFloat) }}
+                        </div>
+                        <div class="form-parameterValueList">
+                            <h3>Caractéristiques pour le type Liste</h3>
+                            {{ form_widget(form.parameterValueLists) }}
+                        </div>
+                        <div class="form-parameterValueBool">
+                            <h3>Caractéristiques pour le type Booléen</h3>
+                            {{ form_widget(form.parameterValueBool) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block _experience_parameters_entry_children_entry_parentValue_row %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        <div class="parameter-parentValue">
+            <span class="field-interface"></span>
+            <span style="display:none;">{{ form_widget(form) }}</span>
+        </div>
+        {{ form_errors(form) }}
+    </div>
+{% endblock %}
+
+{% block _experience_images_widget %}
+    <div class="row">
+        <div class="col-xs-12 images" data-prototype="{{ form_widget(form.vars.prototype)|e }}">
+            {% for item in form %}
+                <div class="image">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <div class="item-action">
+                                    <span class="btn btn-danger image-delete" title="Supprimer l'image"><i class="fa fa-trash"></i></span>
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <img src="{{ asset('uploads/images/' ~ item.imageFile.vars.data.file.filename) }}" />
+                                    <div style="display:none;">
+                                        {{ form_row(item.imageName) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <button type="button" class="col-sm-offset-10 btn btn-primary image-add pull-right"><i class="fa fa-plus"></i> Ajouter une image</button>
+{% endblock %}
+
+{% block _exprience_images_entry_widget %}
+    <div class="image">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <div class="item-action">
+                        <span class="btn btn-danger image-delete" title="Supprimer l'image"><i class="fa fa-trash"></i></span>
+                    </div>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{ form_row(form.imageFile) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

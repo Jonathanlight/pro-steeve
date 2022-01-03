@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('libs/bootstrap-slider/bootstrap-slider.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('libs/bootstrap-toggle/bootstrap-toggle.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/experience/generate_form.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('libs/bootstrap-slider/bootstrap-slider.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('libs/bootstrap-toggle/bootstrap-toggle.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/experience/scriptJsGenerateForm.js' ~ '?v=1') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+    {% form_theme form with ['bootstrap_3_horizontal_layout.html.twig', '@Experience/form/experience_dynamic.html.twig'] %}
+
+    {% if experience %}
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ experience.support.name | upper }} - {{ experience.name }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ experience.support.name }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                {% for image in experience.support.images %}
+                                    <img src="{{ asset('uploads/images/' ~ image.imageName) }}" />
+                                {% endfor %}
+                            </div>
+                            <div class="col-xs-9">
+                                {% if experience.support.description %}{{ experience.support.description | raw }}{% endif %}<br/><br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ experience.name }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                {% for image in experience.images %}
+                                    <img src="{{ asset('uploads/images/' ~ image.imageName) }}" />
+                                {% endfor %}
+                            </div>
+                            <div class="col-xs-9">
+                                {% if experience.description %}{{ experience.description | raw }}{% endif %}<br/><br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Paramètres d'entrées</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            {{ form_end(form) }}
+                        </div>
+                        <div class="col-xs-6"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

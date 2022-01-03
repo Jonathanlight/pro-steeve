@@ -1,0 +1,136 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@UserBundle/Resources/config/services.yml" }
+    - { resource: "@ExperienceBundle/Resources/config/services.yml" }
+    - { resource: "@SpoolerBundle/Resources/config/services.yml" }
+    - { resource: "@ToolsBundle/Resources/config/services.yml" }
+    - { resource: "@MailingBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: fr
+    image_path: "/support/images/"
+    files_path: "/documents/files/"
+    tmp_directory: "%kernel.root_dir%/../var/tmp/"
+
+# Company
+    compagny:
+      company_name: "ENS Cachan - STEEVE"
+      company_mail_sender: "joffrey.roy@audience-pro.com"
+
+framework:
+    #esi: ~
+    translator: { fallbacks: ['%locale%'] }
+    secret: '%secret%'
+    router:
+        resource: '%kernel.project_dir%/app/config/routing.yml'
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    #serializer: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    session:
+        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+    fragments: ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+    serializer: { enabled: true }
+
+# Twig Configuration
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes:
+        - 'form/fields.html.twig'
+    globals:
+        api_address: "https://steeve.audience-pro.com/api/"
+        logo: "%logo%"
+        favicon: "%favicon%"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #path: '%database_path%'
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    port: "%mailer_port%"
+    encryption: "%mailer_encryption%"
+    auth_mode: "%mailer_auth_mode%"
+    spool:     { type: memory }
+
+# FOS User Bundle
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: UserBundle\Entity\User
+    from_email:
+        address: contact@steeve.ens-cachan.fr
+        sender_name: Steeve
+
+#Vich Uploader
+vich_uploader:
+    db_driver: orm
+    mappings:
+        image:
+            uri_prefix: "%image_path%"
+            upload_destination: "%kernel.root_dir%/../web/uploads/images"
+            inject_on_load: true
+            namer: vich_uploader.namer_uniqid
+
+        results:
+            uri_prefix: "%files_path%"
+            upload_destination: "%kernel.root_dir%/../web/uploads/results"
+            inject_on_load: true
+            namer: vich_uploader.namer_uniqid
+
+# FOS Rest Bundle Api
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+        formats:
+            xml: true
+            json : true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+    routing_loader:
+        default_format: json

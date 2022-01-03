@@ -1,0 +1,108 @@
+<div class="row properties">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{% if experience.name %}{{ experience.name }}{% else %}Expérience{% endif %}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        {% for image in experience.images %}
+                            <img src="{{ asset('uploads/images/' ~ image.imageName) }}" />
+                        {% endfor %}
+                    </div>
+                    <div class="col-xs-6">
+                        <strong>Description :</strong> {% if experience.description %}{{ experience.description | raw }}{% endif %}<br/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row properties">
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Caractéristiques</h3>
+            </div>
+            <div class="panel-body">
+                {% if experience.name %}<strong>Expérience</strong> : {{ experience.name }}<br>{% endif %}
+                {% if experience.support %}<strong>Support</strong> : {{ experience.support.name }}<br>{% endif %}
+                {% if experience.experienceType %}<strong>Type d'expérience</strong> : {{ experience.experienceType.name }}<br>{% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Exécution</h3>
+            </div>
+            <div class="panel-body">
+                {% if experience.server and experience.script %}<strong>Serveur</strong> : {{ experience.server.address }}{{ experience.script }}<br>{% endif %}
+                {% if experience.requiredMemory %}<strong>Mémoire requise</strong> : {{ experience.requiredMemory }} Mo<br>{% endif %}
+                {% if experience.requiredTime %}<strong>Temps d'exécution</strong> : {{ experience.requiredTime }} secondes<br>{% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row properties">
+    {% if experience.parameters %}
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Paramètres</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table parameters-table col-sm-12">
+                    <thead>
+                        <th style="width: 40%;">Nom</th>
+                        <th>Type</th>
+                        <th>Dépendance(s)</th>
+                    </thead>
+                    <tbody class="parameters">
+                    {% for parameter in experience.parameters %}
+                        <tr class="parameter" valign="top">
+                            <td class="parameter-name">
+                                {{ parameter.name }}
+                            </td>
+                            <td class="parameter-parameter-type">
+                                {{ parameter.parameterTypeReadable }}
+                            </td>
+                            <td class="parameter-children">
+                                {% if parameter.children is not null %}
+                                    <ul>
+                                    {% for child in parameter.children %}
+                                        <li>{{ child.name }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    Aucune
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="row answers">
+    {% if experience.spoolerItems | length > 0 %}
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Résultats de l'expérience</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="btn-group" role="group" style="margin-bottom: 20px;">
+                        <a id="del-answer" class="btn btn-danger" href="{{ path('experienceAnswersDelete', {id: experience.id}) }}"><i class="fa fa-trash"></i>&nbsp;&nbsp;Supprimer {% if experience.spoolerItems | length > 1 %}les {{ experience.spoolerItems | length }} résultats{% else %}le résultat{% endif %} de cette expérience.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,95 @@
+<?php
+
+namespace ExperienceBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
+
+/**
+ * SpoolerItem
+ *
+ * @ORM\Table(name="spooler_item")
+ * @ORM\Entity(repositoryClass="ExperienceBundle\Repository\SpoolerItemRepository")
+ */
+class SpoolerItem
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+
+    static $statusAvailable = array(
+        0 => 'En attente',
+        1 => 'En cours',
+        2 => 'Exécuté'
+    );
+
+    /**
+     * @var Experience
+     *
+     * @ORM\ManyToOne(targetEntity="Experience", inversedBy="SpoolerItem", cascade={"persist"})
+     */
+    private $experience;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"}, inversedBy="SpoolerItem")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $user;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_", type="integer")
+     */
+    private $date_;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return SpoolerItem
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+}
+

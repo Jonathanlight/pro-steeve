@@ -1,0 +1,78 @@
+@import 'helpers';
+
+// #1 theme ----------------------------------------------------------------- \\
+// | ======================================================================== \\
+
+// | -- color ............................................................... \\
+
+$primary-color: #006C80;
+$contrast-color: #00E2AB;
+
+// | -- border radius ....................................................... \\
+
+$border-radius: 0;
+
+// | -- transition duration ................................................. \\
+
+$hover-transition-duration: 200ms;
+
+
+// #1 texte ----------------------------------------------------------------- \\
+// | ======================================================================== \\
+
+$titleColor: $primary-color;
+
+$texte-courant-color: #3d3d3d;
+
+$linkColor: $contrast-color;
+$linkColorHover: to-white($linkColor, 35%);
+
+
+// #1 main nav -------------------------------------------------------------- \\
+// | ======================================================================== \\
+
+$main-nav-bgc1: $primary-color;
+$main-nav-bgc2: $main-nav-bgc1;
+
+$main-nav-color: #fff;
+$main-nav-color-hover: $contrast-color;
+
+$main-nav-brand-color: $contrast-color;
+
+
+// #1 main content container ------------------------------------------------ \\
+// | ======================================================================== \\
+
+// | -- padding ............................................................. \\
+
+$main-content-container-padding: 15px;
+
+
+// #2 panel ----------------------------------------------------------------- \\
+// | ======================================================================== \\
+
+// | -- heading background color ............................................ \\
+
+// si vous voulez faire un dégradé changez les 2 couleurs
+// sinon changez que la première.
+
+$panelHeadingBkgColor1: $primary-color;
+$panelHeadingBkgColor2: $panelHeadingBkgColor1;
+
+// | -- navbar title ........................................................ \\
+
+$panel-heading-navbar-brand : $contrast-color;
+
+// | -- heading ............................................................. \\
+
+$panelHeadingColor: #fff;
+
+// | -- border .............................................................. \\
+
+$panel-heading-border: none;
+$panel-heading-border-radius: $border-radius;
+
+// | -- parametres divers ................................................... \\
+
+$panel-heading-full-width: true;
+$panel-heading-stick-to-top: true;

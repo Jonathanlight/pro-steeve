@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+{% block pageHeader %}
+{% endblock pageHeader %}
+
+{%  if form is defined %}
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{%  endif %}
+
+{% block body %}
+    {% block fos_user_content %}
+    {% endblock fos_user_content %}
+{% endblock %}

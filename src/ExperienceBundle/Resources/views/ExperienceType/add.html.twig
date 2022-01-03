@@ -1,0 +1,10 @@
+{% extends "@Experience/experienceType.base.html.twig" %}
+
+{% block body %}
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div><a class="btn-default btn abutton" href="#" onclick="goBack();"><span class="glyphicon glyphicon-chevron-left"></span>Retour</a></div>
+    {{ form_end(form) }}
+{% endblock %}
+

@@ -1,0 +1,53 @@
+
+{% block _support_images_widget %}
+    <div class="row">
+        <div class="col-xs-12 images" data-prototype="{{ form_widget(form.vars.prototype)|e }}">
+            {% for item in form %}
+            <div class="image">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <div class="item-action">
+                                <span class="btn btn-danger image-delete" title="Supprimer l'image"><i class="fa fa-trash"></i></span>
+                            </div>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <img src="{{ asset('uploads/images/' ~ item.imageFile.vars.data.file.filename) }}" />
+                                <div style="display:none;">
+                                    {{ form_row(item.imageName) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <button type="button" class="col-sm-offset-10 btn btn-primary image-add pull-right"><i class="fa fa-plus"></i> Ajouter une image</button>
+{% endblock %}
+
+{% block _support_images_entry_widget %}
+    <div class="image">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <div class="item-action">
+                        <span class="btn btn-danger image-delete" title="Supprimer l'image"><i class="fa fa-trash"></i></span>
+                    </div>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{ form_row(form.imageFile) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

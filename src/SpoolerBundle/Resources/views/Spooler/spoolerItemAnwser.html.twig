@@ -1,0 +1,112 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/spooler/loader.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="text-center" >Résultat de votre expérience</h1>
+
+    {% if app.user %}
+    <div class="btn-group" role="group" style="margin-bottom: 20px;">
+        <a id="del-answer" class="btn btn-danger" href="{{ path('spoolerAnswerDelete', {id: spoolerItemAnwsers.id}) }}"><i class="fa fa-trash"></i>&nbsp;&nbsp;Supprimer ce résultat</a>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Support : {{ spoolerItemAnwsers.experience.support.name }}</div>
+                <div class="panel-body">
+                    <div class="col-md-3">
+                        {% for images in spoolerItemAnwsers.experience.support.images %}
+                            {% if images.imageName is defined %}
+                                <img src="{{ asset('uploads/images/' ~ images.imageName) }}" class="img-thumbnail" alt="{{ spoolerItemAnwsers.experience.name }}">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-9">
+                        <h3> {{ spoolerItemAnwsers.experience.support.name }}  </h3>
+                        <p> {{ spoolerItemAnwsers.experience.support.description|raw }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Expérience : {{ spoolerItemAnwsers.experience.name }} </div>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            {% for images in spoolerItemAnwsers.experience.images %}
+                                {% if images.imageName is defined %}
+                                    <img src="{{ asset('uploads/images/' ~ images.imageName) }}" class="img-thumbnail" alt="{{ spoolerItemAnwsers.experience.name }}">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-9">
+                            <h3> {{ spoolerItemAnwsers.experience.name }}  </h3>
+                            <p> {{ spoolerItemAnwsers.experience.description|raw }} </p>
+                        </div>
+                    </div>
+
+                    <h4>Paramètres</h4>
+                    <ul class="list-group">
+                    {% for requestedParameter in spoolerItemAnwsers.requestedParameters %}
+                        <li class="list-group-item">  {{ requestedParameter.parameter.name }} {% if requestedParameter.parameter.unit %}({{ requestedParameter.parameter.unit }}){% endif %}:
+                            {% if requestedParameter.parameter.parameterType == 2 %}
+                                {% if requestedParameter.value == '1' %}
+                                    True
+                                {% else %}
+                                    False
+                                {% endif %}
+                            {% else %}
+                                {{ requestedParameter.value }}
+                            {% endif %}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Documents</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                    {% for result in spoolerItemAnwsers.resultfile %}
+                        {% if result.fileName|split('.')|last != 'mp4' %}
+                            <li class="list-group-item"> <a href="{{ asset('uploads/results/' ~ result.fileName) }}" target="_blank"> {{ result.title }} </a> <span class="badge"> {{ result.fileName|split('.')|last }}</span></li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Vidéo de l'expérience</div>
+                <div class="panel-body">
+                    {% for result in spoolerItemAnwsers.resultfile %}
+                        {% if result.fileName|split('.')|last == 'mp4' %}
+                            <video style="width: 100%;" controls {#autoplay="autoplay"#}>
+                                <source src="{{ asset('uploads/results/' ~ result.fileName) }}" type="video/mp4" >
+                            </video>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

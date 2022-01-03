@@ -1,0 +1,11 @@
+{% extends "@Experience/server.base.html.twig" %}
+
+{% block body %}
+    <div class="alert alert-danger" role="alert">
+        <i class="fa fa-trash"></i> Êtes-vous sûr de vouloir supprimer le server <strong>{{ server.name }}</strong> ?<br/>
+    </div>
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+    <div><a class="btn-default btn abutton" href="#" onclick="goBack();"><span class="glyphicon glyphicon-chevron-left"></span>Retour</a></div>
+{% endblock %}

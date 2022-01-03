@@ -1,0 +1,7 @@
+services:
+#    spooler.example:
+#        class: SpoolerBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+      spoolermanager:
+              class: SpoolerBundle\Service\SpoolerManager
+              arguments: ["@doctrine.orm.entity_manager"]

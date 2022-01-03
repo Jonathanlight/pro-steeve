@@ -1,0 +1,18 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: c1steeve
+    database_user: c1steeve
+    database_password: '64#ZtWKmAtv'
+    #For dev only use SMTP instead of mail
+    mailer_transport: mail
+    mailer_host: mx.audience-pro.com
+    mailer_user: app@audience-pro.com
+    mailer_password: L@s2xNzAHe7d
+    mailer_port: 587
+    mailer_encryption: tls
+    mailer_auth_mode: login
+    logo: 'https://newrelic.com/assets/newrelic/source/NewRelic-logo-square-w.png'
+    favicon: 'https://newrelic.com/assets/newrelic/source/NewRelic-logo-square-w.png'
+    secret: 12408837576fa76d2f80743e7aec72db24c83c9d

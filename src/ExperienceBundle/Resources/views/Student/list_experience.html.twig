@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('libs/data-tables/datatables.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/experience/public-list.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('libs/data-tables/datatables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/common/data-table-init.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+        <div class="row">
+        {% for experience in experiences %}
+            <div class="col-xs-12 col-md-4 col-lg-4">
+                <div class="panel panel-default panel-card">
+                    <div class="panel-body">
+                        {% if experience.images | length > 0 %}
+                            {% for image in experience.images %}
+                                <img src="{{ asset('uploads/images/' ~ image.imageName) }}" class="resize-img"/>
+                            {% endfor %}
+                        {% else %}
+                            {% for image in experience.support.images %}
+                                <img src="{{ asset('uploads/images/' ~ image.imageName) }}" class="resize-img" />
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="panel-footer">
+                        <h3>{{ experience.name }}</h3>
+                        <div class="type"><strong>Expérience :</strong> {{ experience.experienceType.name }}</div>
+                        <div class="support"><strong>Support :</strong> {{ experience.support.name }}</div>
+                        <hr>
+                        <div class="btn-group">
+                            <div class="text-right">
+                            <a href="{{ path('experienceConfigurationPublic', {'id': experience.id}) }}" class="btn btn-default table-action pull-right"><i class="fa fa-desktop"></i> Lancer </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+{% endblock %}

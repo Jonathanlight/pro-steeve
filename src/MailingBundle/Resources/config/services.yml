@@ -1,0 +1,4 @@
+services:
+    mailing.inline_styles:
+        class: MailingBundle\Service\InlineStyles
+        arguments: []

@@ -1,0 +1,76 @@
+{% extends "@Experience/experience.base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/experience/edit.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('libs/tinymce-4.3.8/js/tinymce/tinymce.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/common/tiny-mce-init.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/experience/edit.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    {% form_theme form with ['bootstrap_3_horizontal_layout.html.twig', '@Experience/form/experience.html.twig', '@Experience/form/parameter.html.twig'] %}
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div class="row parameter-responsive-table">
+        <div class="col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Caractéristiques</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.support) }}
+                    {{ form_row(form.experienceType) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.images) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Exécution</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_row(form.server) }}
+                    {{ form_row(form.script) }}
+                    {{ form_row(form.requiredMemory) }}
+                    {{ form_row(form.requiredTime) }}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Publication</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_row(form.published) }}
+                    {{ form_row(form.submit) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row parameter-responsive-table">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Paramètres</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_row(form.parameters) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_row(form.submit_2) }}
+    <div><a class="btn-default btn abutton" href="#" onclick="goBack();"><span class="glyphicon glyphicon-chevron-left"></span>Retour</a></div>
+    {{ form_end(form) }}
+{% endblock %}

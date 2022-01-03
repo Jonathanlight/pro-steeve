@@ -1,0 +1,47 @@
+<div class="row properties">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{% if server.name %}{{ server.name }}{% else %}Serveur{% endif %}</h3>
+            </div>
+            <div class="panel-body">
+                <strong>Mémoire :</strong> {% if server.memory %}{{ server.memory }}{% endif %}<br/>
+                <strong>Adresse :</strong> {% if server.address %}{{ server.address }}{% endif %}<br/>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if server.experiences is not empty %}
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Expérience(s)</h2>
+        <table id="experience-list" class="table table-striped dyn-table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Expérience</th>
+                <th>Type d'expérience</th>
+                <th class="list-min-width"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for experience in server.experiences %}
+                <tr>
+                    <td><a href="{{ path('experienceDetail', { 'id': experience.id }) }}">{{ experience.id }}</a></td>
+                    <td>{% if experience.name %}{{ experience.name }}{% endif %}</td>
+                    <td>{% if experience.experienceType %}{{ experience.experienceType.name }}{% endif %}</td>
+                    <td class="table-action-col">
+                        <div class="btn-group">
+                            <a href="{{ path('experienceDetail', {'id': experience.id}) }}" class="btn btn-default table-action"><i class="fa fa-eye"></i></a>
+                            <a href="{{ path('experienceEdit', {'id': experience.id}) }}" class="btn btn-default table-action"><i class="fa fa-pencil"></i></a>
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}<a href="{{ path('experienceDelete', {'id': experience.id}) }}" class="btn btn-danger table-action"><i class="fa fa-trash"></i></a>{% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,12 @@
+{% extends "@User/user.base.html.twig" %}
+
+{% block body %}
+    <div class="alert alert-danger" role="alert">
+        <i class="fa fa-trash"></i> Ëtes vous sûr de vouloir supprimer le commercial <strong>{{ user.firstName }} {{ user.lastName }}</strong> ?<br/>
+    </div>
+    {% form_theme delete_form 'bootstrap_3_layout.html.twig' %}
+    {{ form_start(delete_form) }}
+    <input class="btn btn-default pull-right" type="submit" value="Confirmer la suppression">
+    {{ form_end(delete_form) }}
+    <div><a class="btn-default btn abutton" href="#" onclick="goBack();"><span class="glyphicon glyphicon-chevron-left"></span>Retour</a></div>
+{% endblock %}

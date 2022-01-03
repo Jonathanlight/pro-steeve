@@ -1,0 +1,33 @@
+// #1 color to white -------------------------------------------------------- \\
+// ========================================================================== \\
+
+@function to-white($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+// #2 color to black -------------------------------------------------------- \\
+// ========================================================================== \\
+
+@function to-black($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// #3 linear gradient to bottom --------------------------------------------- \\
+// ========================================================================== \\
+
+@mixin linear-gradient-to-bottom($color1, $color2) {
+  @if $color1 != $color2 {
+    background-color:$color1;
+    background-image: -webkit-linear-gradient(top,$color1 0,$color2 100%);
+    background-image: -o-linear-gradient(top,$color1 0,$color2 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from($color1),to($color2));
+    background-image: linear-gradient(to bottom,$color1 0,$color2 100%);
+    $ie-color1: str_slice(#{$color1}, 2, -1);
+    $ie-color2: str_slice(#{$color2}, 2, -1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff#{$ie-color1}', endColorstr='#ff#{$ie-color2}', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  }@else {
+    background-image: none;
+    background-color: $color1;
+  }
+}

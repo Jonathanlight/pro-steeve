@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/spooler/loader.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">var spoolerItemId = {{ spoolerItemId }}; </script>
+    <script src="{{ asset('js/spooler/loader.js') }}"></script>
+    <script src="{{ asset('js/spooler/check_spoolerItem.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <h1>Lancement de l'expérience</h1>
+    <div class="row height_slim">
+        <div style="text-align: center"><div id="loader"></div></div>
+        <div style="text-align: center"><div id="validated" style="display: none;"></div></div>
+        <h3 id="status" style="text-align: center; margin-top: 20px;">Veuillez patienter...</h3>
+        <div id="status-detail" style="font-size: 16px; text-align: center;"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,3 @@
+experience_api:
+    resource: SpoolerBundle\Controller\SpoolerApiController
+    type:     rest

@@ -1,0 +1,7 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block pageTitle %}<span id="title-reset-password">{{ 'Reset password'|trans }}</span>{% endblock %}
+
+{% block fos_user_content %}
+{% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+{% endblock fos_user_content %}

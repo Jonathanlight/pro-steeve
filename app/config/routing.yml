@@ -1,0 +1,39 @@
+tools:
+    resource: "@ToolsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+experience:
+    resource: "@ExperienceBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+user_std_user:
+    resource: "@UserBundle/Controller/UserController.php"
+    type:     annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+#FOSUserBundle
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    type: xml
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+spooler:
+    resource: "@SpoolerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+api:
+    resource: "routing.api.yml"
+    prefix:   /api

@@ -1,0 +1,32 @@
+/* Center the loader */
+#loader {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: 0px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #65db34;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+#validated{
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: 0px solid #f3f3f3;
+    border-radius: 50%;
+    background: url("../../image/validated.png");
+    background-size: 150px 150px;
+    background-repeat: no-repeat;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

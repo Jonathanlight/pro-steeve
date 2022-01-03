@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACE,oCAAqB;EACnB,UAAU,EAAE,KAAK;;AAInB,2CAAyB;EACvB,KAAK,EAAC,IAAI;EACV,6DAAiB;IACf,UAAU,EAAE,OAAO;AAGvB,yBAAO;EACL,UAAU,EAAE,KAAK;AAEnB,yBAAO;EACL,UAAU,EAAE,IAAI",
+"sources": ["generate_form.scss"],
+"names": [],
+"file": "generate_form.css"
+}

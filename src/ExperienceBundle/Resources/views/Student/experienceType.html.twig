@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('libs/data-tables/datatables.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/experience/public-list.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('libs/data-tables/datatables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/common/data-table-init.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        {% for experienceType in experienceTypes %}
+            <div class="col-xs-12 col-md-2 col-lg-2">
+                <div class="panel panel-default panel-card">
+                    <div class="panel-footer">
+                        <div class="type"><strong>Type :</strong> {{ experienceType.name }}</div>
+                        <hr>
+                        <div class="btn-group">
+                            <div class="text-right">
+                                <a href="{{ path('publicExperienceTypeDetail', {'id': experienceType.id}) }}" class="btn btn-default table-action pull-right">
+                                    <i class="fa fa-desktop"></i> Voir </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

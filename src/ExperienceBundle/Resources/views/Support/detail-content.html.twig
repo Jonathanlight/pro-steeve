@@ -1,0 +1,56 @@
+<div class="row properties">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{% if support.name %}{{ support.name }}{% else %}Support{% endif %}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        {% for image in support.images %}
+                            <img src="{{ asset('uploads/images/' ~ image.imageName) }}" />
+                        {% endfor %}
+                    </div>
+                    <div class="col-xs-6">
+                        <strong>Description :</strong> {% if support.description %}{{ support.description | raw }}{% endif %}<br/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if support.experiences is not empty %}
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Expérience(s)</h2>
+        <table id="experience-list" class="table table-striped dyn-table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Expérience</th>
+                <th>Type d'expérience</th>
+                <th class="list-min-width"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for experience in support.experiences %}
+                <tr>
+                    <td><a href="{{ path('experienceDetail', { 'id': experience.id }) }}">{{ experience.id }}</a></td>
+                    <td>{% if experience.name %}{{ experience.name }}{% endif %}</td>
+                    <td>{% if experience.experienceType %}{{ experience.experienceType.name }}{% endif %}</td>
+                    <td class="table-action-col">
+                        <div class="btn-group">
+                            <a href="{{ path('experienceDetail', {'id': experience.id}) }}" class="btn btn-default table-action"><i class="fa fa-eye"></i></a>
+                            <a href="{{ path('experienceEdit', {'id': experience.id}) }}" class="btn btn-default table-action"><i class="fa fa-pencil"></i></a>
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}<a href="{{ path('experienceDelete', {'id': experience.id}) }}" class="btn btn-danger table-action"><i class="fa fa-trash"></i></a>{% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}

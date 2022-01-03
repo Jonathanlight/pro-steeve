@@ -1,0 +1,173 @@
+<?php
+
+namespace SpoolerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
+
+/**
+ * SpoolerItem
+ *
+ * @ORM\Table(name="spooler_item")
+ * @ORM\Entity(repositoryClass="SpoolerBundle\Repository\SpoolerItemRepository")
+ */
+class SpoolerItem
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+
+    static $statusAvailable = array(
+        0 => 'En attente',
+        1 => 'En cours',
+        2 => 'Exécuté'
+    );
+
+    /**
+     * @var Experience
+     *
+     * @ORM\ManyToOne(targetEntity="ExperienceBundle\Entity\Experience", inversedBy="SpoolerItem", cascade={"persist"})
+     */
+    private $experience;
+
+    /**
+     * @var RequestedParameter
+     *
+     * @ORM\OneToMany(targetEntity="\SpoolerBundle\Entity\RequestedParameter", mappedBy="SpoolerItem", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $requestedparameter;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"}, inversedBy="SpoolerItem")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $user;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_", type="datetime")
+     */
+    private $date_;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return SpoolerItem
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set date
+     *
+     * @param integer $date
+     *
+     * @return SpoolerItem
+     */
+    public function setDate($date)
+    {
+        $this->date_ = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return integer
+     */
+    public function getDate()
+    {
+        return $this->date_;
+    }
+
+    /**
+     * Set experience
+     *
+     * @param \ExperienceBundle\Entity\Experience $experience
+     *
+     * @return SpoolerItem
+     */
+    public function setExperience(\ExperienceBundle\Entity\Experience $experience = null)
+    {
+        $this->experience = $experience;
+
+        return $this;
+    }
+
+    /**
+     * Get experience
+     *
+     * @return \ExperienceBundle\Entity\Experience
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return SpoolerItem
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

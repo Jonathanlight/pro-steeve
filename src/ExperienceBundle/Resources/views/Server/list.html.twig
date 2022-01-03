@@ -1,0 +1,44 @@
+{% extends "@Experience/server.base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('libs/data-tables/datatables.min.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('libs/data-tables/datatables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/common/data-table-init.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    <table id="server-list" class="col-lg-12 table table-striped dyn-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Serveur</th>
+                <th>Memoire</th>
+                <th>Adresse</th>
+                <th>Nombre d'expériences</th>
+                <th class="list-min-width"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for server in servers %}
+            <tr>
+                <td><a href="{{ path('serverDetail', { 'id': server.id }) }}">{{ server.id }}</a></td>
+                <td>{% if server.name %}{{ server.name }}{% endif %}</td>
+                <td>{% if server.memory %}{{ server.memory }}{% endif %}</td>
+                <td>{% if server.address %}{{ server.address }}{% endif %}</td>
+                <td>{% if server.experiences is not empty %}{{ server.experiences | length }}{% else %}0{% endif %}</td>
+                <td class="table-action-col">
+                    <div class="btn-group">
+                        <a href="{{ path('serverDetail', {'id': server.id}) }}" class="btn btn-default table-action"><i class="fa fa-eye"></i></a>
+                        <a href="{{ path('serverEdit', {'id': server.id}) }}" class="btn btn-default table-action"><i class="fa fa-pencil"></i></a>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}<a href="{{ path('serverDelete', {'id': server.id}) }}" class="btn btn-danger table-action"><i class="fa fa-trash"></i></a>{% endif %}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

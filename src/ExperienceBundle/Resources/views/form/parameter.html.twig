@@ -1,0 +1,116 @@
+{% use 'bootstrap_3_layout.html.twig' %}
+
+{% block _experience_parameters_entry_parameterValueLists_entry_value_label %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' col-sm-4')|trim}) %}
+    {{- block('form_label') -}}
+{% endblock %}
+
+{% block _experience_parameters_entry_parameterValueLists_entry_defaultValue_label %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' col-sm-6')|trim}) %}
+    {{- block('form_label') -}}
+{% endblock %}
+
+{% block _experience_parameters_entry_parameterValueLists_entry_value_row %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        <div class="col-sm-8">
+            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _experience_parameters_entry_parameterValueLists_entry_defaultValue_row %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        <div class="col-sm-6">
+            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _experience_parameters_entry_parameterValueLists_widget %}
+    <div class="row">
+        <div class="col-xs-12 values" data-prototype="{{ form_widget(form.vars.prototype)|e }}">
+            {% for item in form %}
+                <div class="value">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <div class="item-action">
+                                    <span class="btn btn-primary value-move" title="Déplacer la valeur"><i class="fa fa-arrows"></i></span>
+                                    <span class="btn btn-danger value-delete" title="Supprimer la valeur"><i class="fa fa-trash"></i></span>
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    {{ form_row(item.value) }}
+                                    <div class="value-weight">
+                                        <span style="display:none;">{{ form_widget(item.weight) }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7">
+                                    {{ form_row(item.defaultValue) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <button type="button" class="col-sm-offset-10 btn btn-primary value-add pull-right"><i class="fa fa-plus"></i> Ajouter une valeur</button>
+{% endblock %}
+
+{% block _experience_parameters_entry_parameterValueLists_entry_widget %}
+    <div class="value">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <div class="item-action">
+                        <span class="btn btn-primary value-move" title="Déplacer le paramètre"><i class="fa fa-arrows"></i></span>
+                        <span class="btn btn-danger value-delete" title="Supprimer de le paramètre"><i class="fa fa-trash"></i></span>
+                    </div>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-5">
+                        {{ form_row(form.value) }}
+                        <div class="value-weight">
+                            <span style="display:none;">{{ form_widget(form.weight) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        {{ form_row(form.defaultValue) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{# Gestion de second niveau de paramètre #}
+{% block _experience_parameters_entry_children_entry_parameterValueLists_entry_value_label %}
+    {{ block("_experience_parameters_entry_parameterValueLists_entry_value_label") }}
+{% endblock %}
+{% block _experience_parameters_entry_children_entry_parameterValueLists_entry_defaultValue_label %}
+    {{ block("_experience_parameters_entry_parameterValueLists_entry_defaultValue_label") }}
+{% endblock %}
+{% block _experience_parameters_entry_children_entry_parameterValueLists_entry_value_row %}
+    {{ block("_experience_parameters_entry_parameterValueLists_entry_value_row") }}
+{% endblock %}
+{% block _experience_parameters_entry_children_entry_parameterValueLists_entry_defaultValue_row %}
+    {{ block("_experience_parameters_entry_parameterValueLists_entry_defaultValue_row") }}
+{% endblock %}
+{% block _experience_parameters_entry_children_entry_parameterValueLists_widget %}
+    {{ block("_experience_parameters_entry_parameterValueLists_widget") }}
+{% endblock %}
+{% block _experience_parameters_entry_children_entry_parameterValueLists_entry_widget %}
+    {{ block("_experience_parameters_entry_parameterValueLists_entry_widget") }}
+{% endblock %}

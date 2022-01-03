@@ -1,0 +1,13 @@
+{% extends "@Experience/experience.base.html.twig" %}
+
+{% block body %}
+
+    <div class="btn-group" role="group" style="margin-bottom: 20px;">
+        <a id="edit-experience" class="btn btn-default" href="{{ path('experienceEdit', {id: experience.id}) }}"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Modifier</a>
+        <a id="del-experience" class="btn btn-danger" href="{{ path('experienceDelete', {id: experience.id}) }}"><i class="fa fa-trash"></i>&nbsp;&nbsp;Supprimer</a>
+    </div>
+
+    {{ include('@Experience/Experience/detail-content.html.twig', {experience: experience}) }}
+
+    <div><a class="btn-default btn abutton" href="#" onclick="goBack();"><span class="glyphicon glyphicon-chevron-left"></span>Retour</a></div>
+{% endblock %}

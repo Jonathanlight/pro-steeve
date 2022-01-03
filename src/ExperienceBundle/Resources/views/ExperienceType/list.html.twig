@@ -1,0 +1,38 @@
+{% extends "@Experience/experienceType.base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('libs/data-tables/datatables.min.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('libs/data-tables/datatables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/common/data-table-init.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    <table id="experience-list" class="col-lg-12 table table-striped dyn-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Type d'expérience</th>
+                <th class="list-min-width"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for experienceType in experienceTypes %}
+            <tr>
+                <td><a href="{{ path('experienceTypeDetail', { 'id': experienceType.id }) }}">{{ experienceType.id }}</a></td>
+                <td>{% if experienceType.name %}{{ experienceType.name }}{% endif %}</td>
+                <td class="table-action-col">
+                    <div class="btn-group">
+                        <a href="{{ path('experienceTypeDetail', {'id': experienceType.id}) }}" class="btn btn-default table-action"><i class="fa fa-eye"></i></a>
+                        <a href="{{ path('experienceTypeEdit', {'id': experienceType.id}) }}" class="btn btn-default table-action"><i class="fa fa-pencil"></i></a>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}<a href="{{ path('experienceTypeDelete', {'id': experienceType.id}) }}" class="btn btn-danger table-action"><i class="fa fa-trash"></i></a>{% endif %}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

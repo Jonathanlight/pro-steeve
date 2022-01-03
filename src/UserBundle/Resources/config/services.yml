@@ -1,0 +1,7 @@
+services:
+#    user.example:
+#        class: UserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    user.import:
+        class: UserBundle\Service\Import
+        arguments: ["@tools.file", "@fos_user.user_manager", "@swiftmailer.mailer",  "@twig", "@mailing.inline_styles", "%compagny%"]
